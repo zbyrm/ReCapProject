@@ -11,15 +11,65 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //oncekiTestler();
-          //  GetCarsDetailTest();
-            GetCarsDetailTest2();
+            //  GetCarsDetailTest();
+            //   GetCarsDetailTest2();
             //GetByIdTest();
-
             //CarAddTest();
-
             //CarUpdateTest();
+
+
+            //UserAddTest();
+            //CustomerAddTest();
+            AracKiralaTest();
         }
 
+        private static void UserAddTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.Add(
+                new User
+                {
+                    FirstName = "Ahmet",
+                    LastName = "candan",
+                    Email = "acandan@gmail.com",
+                    Password = "123"
+                });
+            Console.WriteLine(result.Message);
+
+        }
+
+        private static void CustomerAddTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal() );
+            var result =  customerManager.Add(
+                new Customer { UserId =1, CompanyName ="ornek firma"  } );
+            Console.WriteLine(result.Message);
+        }
+
+        private static void AracKiralaTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal() );
+            var result = rentalManager.Add(new Rental
+            {
+                CarId = 1,
+                CustomerId = 1,
+                RentDate = DateTime.Now.Date,                
+            });
+            Console.WriteLine(result.Message);
+        }
+
+        private static void AracKiralaUpdateTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add(new Rental
+            {
+                CarId = 1,
+                CustomerId = 1,
+                RentDate = DateTime.Now.Date,
+                ReturnDate = DateTime.Now.Date
+            });
+
+        }
         private static void CarUpdateTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
