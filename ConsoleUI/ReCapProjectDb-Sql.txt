@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [ReCapProjectDb]    Script Date: 04.02.2021 22:34:51 ******/
+/****** Object:  Database [ReCapProjectDb]    Script Date: 25.02.2021 23:50:20 ******/
 CREATE DATABASE [ReCapProjectDb]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,7 @@ ALTER DATABASE [ReCapProjectDb] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [ReCapProjectDb]
 GO
-/****** Object:  Table [dbo].[Brands]    Script Date: 04.02.2021 22:34:51 ******/
+/****** Object:  Table [dbo].[Brands]    Script Date: 25.02.2021 23:50:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,28 @@ CREATE TABLE [dbo].[Brands](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Cars]    Script Date: 04.02.2021 22:34:52 ******/
+/****** Object:  Table [dbo].[CarImages]    Script Date: 25.02.2021 23:50:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CarImages](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CarId] [int] NOT NULL,
+	[ImagePath] [varchar](50) NOT NULL,
+	[Date] [date] NULL,
+ CONSTRAINT [PK_CarImages] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Cars]    Script Date: 25.02.2021 23:50:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +139,7 @@ CREATE TABLE [dbo].[Cars](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Colors]    Script Date: 04.02.2021 22:34:52 ******/
+/****** Object:  Table [dbo].[Colors]    Script Date: 25.02.2021 23:50:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,6 +157,165 @@ CREATE TABLE [dbo].[Colors](
 
 GO
 SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Customers]    Script Date: 25.02.2021 23:50:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Customers](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[CompanyName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Rentals]    Script Date: 25.02.2021 23:50:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rentals](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CarId] [int] NOT NULL,
+	[CustomerId] [int] NOT NULL,
+	[RentDate] [date] NULL,
+	[ReturnDate] [date] NULL,
+ CONSTRAINT [PK_Rentals] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 25.02.2021 23:50:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Users](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[Email] [varchar](20) NOT NULL,
+	[Password] [varchar](15) NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Brands] ON 
+
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (1, N'BMW')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (2, N'Audi')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (3, N'Alfa Romeo')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (4, N'Aston Martin')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (5, N'Bentley')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (6, N'Bugatti')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (7, N'Buick')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (8, N'Cadillac')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (9, N'Ford')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (10, N'Volvo')
+GO
+INSERT [dbo].[Brands] ([Id], [Name]) VALUES (11, N'Mercedes')
+GO
+SET IDENTITY_INSERT [dbo].[Brands] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CarImages] ON 
+
+GO
+INSERT [dbo].[CarImages] ([Id], [CarId], [ImagePath], [Date]) VALUES (1, 1, N'0dcb31a6-19b9-4c3d-b67f-a6d12ecb4f72.png', CAST(N'2021-02-25' AS Date))
+GO
+INSERT [dbo].[CarImages] ([Id], [CarId], [ImagePath], [Date]) VALUES (2, 1, N'c20436c5-a911-471d-8cde-29fa0d665ca3.jpg', CAST(N'2021-02-25' AS Date))
+GO
+INSERT [dbo].[CarImages] ([Id], [CarId], [ImagePath], [Date]) VALUES (3, 1, N'3815f923-a760-403e-a5bd-b9aee39069cc.jpg', CAST(N'2021-02-25' AS Date))
+GO
+INSERT [dbo].[CarImages] ([Id], [CarId], [ImagePath], [Date]) VALUES (4, 1, N'8e6833dd-dffa-489f-a231-d098358f9f50.jpg', CAST(N'2021-02-25' AS Date))
+GO
+INSERT [dbo].[CarImages] ([Id], [CarId], [ImagePath], [Date]) VALUES (5, 1, N'e31f82a7-1ee0-4aff-b5aa-a9751d2be34f.jpg', CAST(N'2021-02-25' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[CarImages] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Cars] ON 
+
+GO
+INSERT [dbo].[Cars] ([Id], [BrandId], [ColorId], [Name], [ModelYear], [DailyPrice], [Description]) VALUES (1, 1, 1, N'520i Executive M Sport', 2012, 600.0000, NULL)
+GO
+INSERT [dbo].[Cars] ([Id], [BrandId], [ColorId], [Name], [ModelYear], [DailyPrice], [Description]) VALUES (2, 10, 5, N'Volvo s80', 2019, 800.0000, NULL)
+GO
+INSERT [dbo].[Cars] ([Id], [BrandId], [ColorId], [Name], [ModelYear], [DailyPrice], [Description]) VALUES (3, 2, 2, N'A5', 2020, 1000.0000, NULL)
+GO
+INSERT [dbo].[Cars] ([Id], [BrandId], [ColorId], [Name], [ModelYear], [DailyPrice], [Description]) VALUES (4, 3, 5, N'Giulietta 1.6 JTD Distinctive', 2020, 600.0000, N'Hatchback 5 kapı')
+GO
+SET IDENTITY_INSERT [dbo].[Cars] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Colors] ON 
+
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (1, N'Siyah')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (2, N'Kırmızı')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (3, N'Mavi')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (4, N'Turuncu')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (5, N'Turkuaz')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (6, N'Sarı')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (7, N'Mor')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (8, N'Yeşil')
+GO
+INSERT [dbo].[Colors] ([Id], [Name]) VALUES (9, N'Pembe')
+GO
+SET IDENTITY_INSERT [dbo].[Colors] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Customers] ON 
+
+GO
+INSERT [dbo].[Customers] ([Id], [UserId], [CompanyName]) VALUES (1, 1, N'ornek firma')
+GO
+SET IDENTITY_INSERT [dbo].[Customers] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Rentals] ON 
+
+GO
+INSERT [dbo].[Rentals] ([Id], [CarId], [CustomerId], [RentDate], [ReturnDate]) VALUES (1, 1, 1, CAST(N'2021-02-14' AS Date), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Rentals] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+
+GO
+INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Email], [Password]) VALUES (1, N'Ahmet', N'candan', N'acandan@gmail.com', N'123')
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 USE [master]
 GO

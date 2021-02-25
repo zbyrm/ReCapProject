@@ -50,5 +50,8 @@ namespace Business.Constants
         public static string RentalNotAvailable = "Araç musait degil!";
         public static string RentalAvailable = "Araç musait";
 
+        public static string CarImageAdded ="Araba resmi eklendi";
+        public static string CarImageDeleted = "Araba resmi silindi";
+        public static string CarImageCountOfCarError= "Bir arabanın en fala 5 resmi olabilir";
     }
 }
