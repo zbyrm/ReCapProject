@@ -30,12 +30,12 @@ namespace WebAPI.Controllers
             }
 
             var result = _authService.CreateAccessToken(userToLogin.Data);
-            if (result.Success)
+            if (!result.Success)
             {
-                return Ok(result.Success);
+                BadRequest(result.Message);
             }
 
-            return BadRequest(result.Message);
+            return Ok(result);  
         }
 
 
