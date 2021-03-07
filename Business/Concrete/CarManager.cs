@@ -3,8 +3,9 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
+using Core.Aspects.Caching;
 using Core.Utilities.Results;
+using Core.Aspects.Transaction;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -89,6 +90,12 @@ namespace Business.Concrete
         public IDataResult< List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult <List<CarDetailDto>>( _carDal.GetCarDetails()) ;
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            throw new NotImplementedException();
         }
     }
 }
